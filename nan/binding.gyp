@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "DisplayManager",
-      "sources": [ "DisplayManager.cc" ],
+      "sources": [ "addon.cc", "DisplayManager.cc" ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"
       ]
