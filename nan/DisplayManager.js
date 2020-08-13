@@ -7,8 +7,10 @@ function main()
 	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
 	sleep(displayManager);
 	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
-	wakeUp(displayManager);
-	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
+	setTimeout(function() {
+		wakeUp(displayManager);
+		console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
+	}, 5000);
 }
 
 function enumerateDisplays(displayManager)
@@ -29,6 +31,11 @@ function wakeUp(displayManager)
 function getLastInputTime(displayManager)
 {
 	return displayManager.getLastInputTime();
+}
+
+function sum(a, b)
+{
+	return a + b;
 }
 
 main();

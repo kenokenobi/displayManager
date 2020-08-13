@@ -65,7 +65,6 @@ NAN_METHOD(DisplayManager::GetDisplays)
 NAN_METHOD(DisplayManager::SleepDevice)
 {
 	SendMessage(GetConsoleWindow(),WM_SYSCOMMAND,SC_MONITORPOWER, (LPARAM)2);
-	Sleep(5000);
 }
 
 NAN_METHOD(DisplayManager::WakeDevice)
