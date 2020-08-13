@@ -6,6 +6,7 @@ LASTINPUTINFO DisplayManager::last_;
 
 DisplayManager::DisplayManager()
 {
+	// Upon constructor call, set the "initial time"
 	last_.cbSize = sizeof(LASTINPUTINFO);
 	GetLastInputInfo(&last_);
 }
@@ -25,7 +26,7 @@ NAN_MODULE_INIT(DisplayManager::Init)
 	// Prototype
 	Nan::SetPrototypeMethod(tpl, "getAttachedDisplays", GetDisplays);
 	Nan::SetPrototypeMethod(tpl, "sleep", SleepDevice);
-	Nan::SetPrototypeMethod(tpl, "wakey", WakeDevice);
+	Nan::SetPrototypeMethod(tpl, "wakey", SimulateMouseMove);
 	Nan::SetPrototypeMethod(tpl, "getLastInputTime", GetLastInputTime);
 
 	constructor.Reset(tpl->GetFunction(context).ToLocalChecked());
@@ -64,11 +65,15 @@ NAN_METHOD(DisplayManager::GetDisplays)
 
 NAN_METHOD(DisplayManager::SleepDevice)
 {
+	// GetConsoleWindow() will return HWND for displays where console is running
+	// WM_SYSCOMMAND contains message SC_MONITORPOWER
+	// 2 for sleep, 1 and -1 are not usable in Windows 10
 	SendMessage(GetConsoleWindow(),WM_SYSCOMMAND,SC_MONITORPOWER, (LPARAM)2);
 }
 
-NAN_METHOD(DisplayManager::WakeDevice)
+NAN_METHOD(DisplayManager::SimulateMouseMove)
 {
+	// do this because SC_MONITORPOWER 1 and -1 are not usable in Windows 10
 	mouse_event(MOUSEEVENTF_MOVE, 0, 1, 0, NULL);
 	Sleep(40);
 	mouse_event(MOUSEEVENTF_MOVE, 0, -1, 0, NULL);

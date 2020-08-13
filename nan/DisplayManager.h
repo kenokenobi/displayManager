@@ -14,7 +14,7 @@ public:
 	static NAN_METHOD(New);
 	static NAN_METHOD(GetDisplays);
 	static NAN_METHOD(SleepDevice);
-	static NAN_METHOD(WakeDevice);
+	static NAN_METHOD(SimulateMouseMove);
 	static NAN_METHOD(GetLastInputTime);
 
 private:

@@ -1,21 +1,16 @@
 var addon = require('bindings')('DisplayManager');
 
-function main()
-{
-	var displayManager = new addon.DisplayManager();
-	enumerateDisplays(displayManager);
-	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
-	sleep(displayManager);
-	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
-	setTimeout(function() {
-		wakeUp(displayManager);
-		console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
-	}, 5000);
-}
-
 function enumerateDisplays(displayManager)
 {
-	console.log(displayManager.getAttachedDisplays());
+	var displays = displayManager.getAttachedDisplays();
+
+	if (displays  === undefined)
+	{
+		throw "Unknown Error: DisplayManager did not return anthing";
+	}
+
+	console.log(displays);
+	return displays;
 }
 
 function sleep(displayManager)
@@ -33,9 +28,22 @@ function getLastInputTime(displayManager)
 	return displayManager.getLastInputTime();
 }
 
-function sum(a, b)
+function testRun()
 {
-	return a + b;
+	var displayManager = new addon.DisplayManager();
+	enumerateDisplays(displayManager);
+	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
+	sleep(displayManager);
+	console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
+	setTimeout(function() {
+		wakeUp(displayManager);
+		console.log("Last Input Time(ms): " + getLastInputTime(displayManager));
+	}, 5000);
 }
 
-main();
+module.exports.enumerateDisplays = enumerateDisplays;
+module.exports.sleep = sleep;
+module.exports.wakeUp = wakeUp;
+module.exports.getLastInputTime = getLastInputTime;
+
+testRun();
