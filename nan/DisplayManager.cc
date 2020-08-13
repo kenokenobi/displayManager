@@ -6,7 +6,7 @@ LASTINPUTINFO DisplayManager::last_;
 
 DisplayManager::DisplayManager()
 {
-	// Upon constructor call, set the "initial time"
+	// Upon constructor call, let's set the "initial time"
 	last_.cbSize = sizeof(LASTINPUTINFO);
 	GetLastInputInfo(&last_);
 }

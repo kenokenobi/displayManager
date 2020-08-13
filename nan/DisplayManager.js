@@ -46,4 +46,4 @@ module.exports.sleep = sleep;
 module.exports.wakeUp = wakeUp;
 module.exports.getLastInputTime = getLastInputTime;
 
-testRun();
+//testRun();
