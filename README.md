@@ -27,3 +27,17 @@ Output:
     7. Added Unit tests using Jest
     
         a. Not able to test C++ part with this :(
+        
+        
+### How to run source
+
+Inside ./nan, run the following commands
+
+    npm install
+
+    node ./
+
+
+### How to run test
+
+    npm run test
